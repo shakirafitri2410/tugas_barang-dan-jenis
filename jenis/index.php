@@ -19,8 +19,8 @@
         <th>Aksi</th>
     </tr>
     <?php
-       include '../..config/koneksi.php';
-       $query = mysqli_query(mysql:$conn,query: "SELECT * FROM barang");
+       include '../config/koneksi.php';
+       $query = mysqli_query(mysql:$conn,query: "SELECT * FROM jenis");
        $no=1;
        if(mysqli_num_rows(result:$query)){
         while($result=mysqli_fetch_assoc(result: $query)){
@@ -30,7 +30,7 @@
                 <td><?php echo $result['id_jenis']?></td>
                 <td><?php echo $result['nama_jenis']?></td>
                 <td>
-                    <a href="">Edit |</a>
+                    <a href="proses_edit.php?id_jenis=<?php echo $result['id_jenis']?>">Edit |</a>
                     <a href="">Hapus |</a>
                 </td>
             </tr>

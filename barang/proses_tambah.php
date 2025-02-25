@@ -13,7 +13,7 @@ $query = mysqli_query($conn, "INSERT INTO BARANG VALUES(
      '$nama_barang',
      '$id_jenis',
      '$harga',
-     '$stok' 
+     '$stok'
      )");
 
      if($query){

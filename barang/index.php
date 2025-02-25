@@ -21,7 +21,7 @@
         <th>aksi</th>
     </tr>
     <?php
-       include '../..config/koneksi.php';
+       include '../config/koneksi.php';
        $query = mysqli_query(mysql:$conn,query: "SELECT * FROM barang");
        $no=1;
        if(mysqli_num_rows(result:$query)){

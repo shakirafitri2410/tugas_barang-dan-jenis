@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Barang</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContect" aria-controls="navbarSupporttedContect" ari>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupporttedContect">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../barang/index.php">Barang</a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../jenis/index.php">Jenis</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
+  <div class="container">
+    <h1>Data Barang</h1>
+
+    <?php
+    // Include database connection file
+    include 'db_config.php';
+
+    // barang ID from
+    $id = $_GET['id'];
+
+    // Query barang data from database
+    $sql = "SELECT b.nama_barang, j.nama_jenis FROM barang b JOIN jenis j ON b.jenis_id = j.id WHERE b.id = '$id'";
+    $result = mysqli_query($conn, $sql);
+
+    // barang data 
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+
+      echo "<table class='table table-striped'>";
+      echo "<tr><th>Nama Barang</th><td>" . $row['nama_barang'] . "</td></tr>";
+      echo "<tr><th>Jenis</th><td>" . $row['nama_jenis'] . "</td></tr>";
+      echo "</table>";
+    } else {
+      echo "<p>Data barang tidak ditemukan.</p>";
+    }
+
+    mysqli_close($conn);
+    ?>
+
+    <a href="index.html" class="btn btn-primary">Kembali ke Daftar Barang</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
